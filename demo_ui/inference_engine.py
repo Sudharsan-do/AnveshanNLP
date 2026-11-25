@@ -25,7 +25,6 @@ import pandas as pd
 import torch
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics import accuracy_score, f1_score
 from sklearn.svm import LinearSVC
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
@@ -211,8 +210,8 @@ class AaveshamNLUService:
     def _compute_benchmark_summary(self) -> dict[str, Any]:
         summary: dict[str, Any] = {
             "baselines": [],
-            "high_conf_comparison": {},
-            "script_breakdown": [],
+            "cv_feature_comparison": [],
+            "cv_summary": {},
             "dataset_stats": {},
         }
 
@@ -230,75 +229,32 @@ class AaveshamNLUService:
                         "parameters": str(row["Parameters"]),
                     }
                 )
+            if len(comp_df) > 0:
+                best_row = comp_df.sort_values("OOF Macro-F1", ascending=False).iloc[0]
+                summary["cv_summary"] = {
+                    "best_cv_model": str(best_row["Model"]),
+                    "mean_macro_f1": round(float(best_row["Mean Macro-F1"]), 4),
+                    "oof_macro_f1": round(float(best_row["OOF Macro-F1"]), 4),
+                    "std_macro_f1": round(float(best_row["Std Macro-F1"]), 4),
+                }
 
-        bench_path = DATA_DIR / "test_ground_truth_benchmark.csv"
-        pure_path = ROOT_DIR / "submission_aavesham_pure.csv"
-        ens_path = ROOT_DIR / "submission.csv"
-
-        if bench_path.exists() and pure_path.exists() and ens_path.exists():
-            bench = pd.read_csv(bench_path)
-            pure = pd.read_csv(pure_path)
-            ens = pd.read_csv(ens_path)
-
-            m_pure = pd.merge(bench, pure, on="example_id")
-            m_ens = pd.merge(bench, ens, on="example_id")
-            hc_mask = m_ens["confidence_tier"].isin(["exact_100pct", "high_conf_99pct"])
-            hc_pure = m_pure[hc_mask]
-            hc_ens = m_ens[hc_mask]
-            y_true = hc_ens["ground_truth_target"].values
-
-            pure_f1 = float(f1_score(y_true, hc_pure["target"].values, average="macro"))
-            pure_acc = float(accuracy_score(y_true, hc_pure["target"].values))
-            ens_f1 = float(f1_score(y_true, hc_ens["target"].values, average="macro"))
-            ens_acc = float(accuracy_score(y_true, hc_ens["target"].values))
-
-            # Class 55 metrics on high-confidence benchmark
-            oos_true = y_true == OOS_CLASS_ID
-            oos_pure = hc_pure["target"].values == OOS_CLASS_ID
-            oos_ens = hc_ens["target"].values == OOS_CLASS_ID
-            oos_pure_f1 = float(f1_score(oos_true, oos_pure, zero_division=0))
-            oos_ens_f1 = float(f1_score(oos_true, oos_ens, zero_division=0))
-
-            summary["high_conf_comparison"] = {
-                "n_samples": int(len(hc_ens)),
-                "standalone_macro_f1": round(pure_f1, 5),
-                "standalone_accuracy": round(pure_acc, 5),
-                "ensemble_macro_f1": round(ens_f1, 5),
-                "ensemble_accuracy": round(ens_acc, 5),
-                "macro_f1_gain": round(ens_f1 - pure_f1, 5),
-                "class55_standalone_f1": round(oos_pure_f1, 4),
-                "class55_ensemble_f1": round(oos_ens_f1, 4),
-            }
-
-            for sc in ["devanagari", "latin", "mixed"]:
-                sm = (hc_ens["script"] == sc).values
-                s_pure_f1 = float(
-                    f1_score(y_true[sm], hc_pure["target"].values[sm], average="macro")
-                )
-                s_ens_f1 = float(
-                    f1_score(y_true[sm], hc_ens["target"].values[sm], average="macro")
-                )
-                s_pure_acc = float(accuracy_score(y_true[sm], hc_pure["target"].values[sm]))
-                s_ens_acc = float(accuracy_score(y_true[sm], hc_ens["target"].values[sm]))
-                summary["script_breakdown"].append(
+        cv_feat_path = ROOT_DIR / "cv_metrics_comparison.csv"
+        if cv_feat_path.exists():
+            feat_df = pd.read_csv(cv_feat_path)
+            for _, row in feat_df.iterrows():
+                summary["cv_feature_comparison"].append(
                     {
-                        "script": sc,
-                        "count": int(sm.sum()),
-                        "standalone_f1": round(s_pure_f1, 4),
-                        "ensemble_f1": round(s_ens_f1, 4),
-                        "standalone_acc": round(s_pure_acc, 4),
-                        "ensemble_acc": round(s_ens_acc, 4),
-                        "delta_f1": round(s_ens_f1 - s_pure_f1, 4),
+                        "method": str(row["Model / Methodology"]),
+                        "mean_macro_f1": round(float(row["Mean Macro-F1"]), 4),
+                        "oof_macro_f1": round(float(row["OOF Macro-F1"]), 4),
                     }
                 )
 
         summary["dataset_stats"] = {
             "train_rows": 16936,
-            "test_rows": 4912,
             "num_classes": NUM_CLASSES,
             "xlit_dict_entries": len(self.xlit_dict),
             "train_script_pct": {"devanagari": 61.13, "latin": 33.33, "mixed": 5.54},
-            "test_script_pct": {"devanagari": 32.65, "latin": 64.21, "mixed": 3.14},
             "class_55_train_share_pct": 1.47,
             "class_55_train_count": 249,
         }

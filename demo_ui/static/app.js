@@ -156,9 +156,9 @@ async function fetchSystemStats() {
   const totalM = (mi.total_active_params / 1e6).toFixed(2);
   $("compliance-pill-text").textContent = `${totalM}M / 300.0M (PASS)`;
   $("device-pill-text").textContent = mi.device;
-  const hc = data.benchmark?.high_conf_comparison;
-  if (hc?.ensemble_macro_f1) {
-    $("hdr-f1").textContent = hc.ensemble_macro_f1.toFixed(4);
+  const cvSum = data.benchmark?.cv_summary;
+  if (cvSum?.oof_macro_f1) {
+    $("hdr-f1").textContent = cvSum.oof_macro_f1.toFixed(4);
   }
 
   renderComplianceTab(data);
@@ -443,33 +443,27 @@ function renderComplianceTab(data) {
     </table>
   `;
 
-  const sb = data.benchmark?.script_breakdown || [];
+  const cvFeats = data.benchmark?.cv_feature_comparison || [];
   const sbWrap = $("script-benchmark-bars");
   sbWrap.innerHTML = "";
-  sb.forEach((row) => {
+  cvFeats.forEach((row) => {
     const el = document.createElement("div");
     el.className = "bench-bar-group";
     el.innerHTML = `
       <div class="bench-bar-head">
-        <span><strong>${row.script.toUpperCase()}</strong> <span class="muted mono">(N=${row.count.toLocaleString()})</span></span>
-        <span class="mono">${row.standalone_f1.toFixed(4)} → <strong style="color:#15803d">${row.ensemble_f1.toFixed(4)} (+${(row.delta_f1 * 100).toFixed(2)}%)</strong></span>
+        <span><strong>${escapeHtml(row.method)}</strong></span>
+        <span class="mono">OOF: <strong>${row.oof_macro_f1.toFixed(4)}</strong></span>
       </div>
-      <div class="bench-track"><div class="bench-fill-stand" style="width:${(row.standalone_f1 * 100).toFixed(1)}%"></div></div>
-      <div class="bench-track"><div class="bench-fill-ens" style="width:${(row.ensemble_f1 * 100).toFixed(1)}%"></div></div>
+      <div class="bench-track"><div class="bench-fill-ens" style="width:${(row.oof_macro_f1 * 100).toFixed(1)}%"></div></div>
     `;
     sbWrap.appendChild(el);
   });
 
   const baselines = data.benchmark?.baselines || [];
-  let tbl = `<table class="audit-table"><thead><tr><th>Model</th><th>Macro-F1</th><th>Latency</th><th>Params</th></tr></thead><tbody>`;
+  let tbl = `<table class="audit-table"><thead><tr><th>Model</th><th>Mean CV F1</th><th>OOF F1</th><th>Latency</th><th>Params</th></tr></thead><tbody>`;
   baselines.forEach((b) => {
-    tbl += `<tr><td>${escapeHtml(b.model)}</td><td class="mono">${b.mean_macro_f1.toFixed(4)}</td><td class="mono">${b.mean_latency_ms} ms</td><td class="mono">${escapeHtml(b.parameters)}</td></tr>`;
+    tbl += `<tr><td>${escapeHtml(b.model)}</td><td class="mono">${b.mean_macro_f1.toFixed(4)}</td><td class="mono">${b.oof_macro_f1.toFixed(4)}</td><td class="mono">${b.mean_latency_ms} ms</td><td class="mono">${escapeHtml(b.parameters)}</td></tr>`;
   });
-  const hc = data.benchmark?.high_conf_comparison;
-  if (hc?.standalone_macro_f1) {
-    tbl += `<tr><td><strong>aavesham_v2 Standalone</strong></td><td class="mono">${hc.standalone_macro_f1.toFixed(4)}</td><td class="mono">~3 ms/q (batch)</td><td class="mono">278.09M</td></tr>`;
-    tbl += `<tr><td><strong>aavesham_v2 + LinearSVC</strong></td><td class="mono" style="color:#15803d"><strong>${hc.ensemble_macro_f1.toFixed(4)}</strong></td><td class="mono">Live MPS/CPU</td><td class="mono">${(mi.total_active_params / 1e6).toFixed(2)}M</td></tr>`;
-  }
   tbl += `</tbody></table>`;
   $("baseline-table-wrap").innerHTML = tbl;
 }
