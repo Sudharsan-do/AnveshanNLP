@@ -1,0 +1,42 @@
+# Ignore everything by default (keeps venv, 1GB+ model weights, feature caches, and old experiments out of GitHub)
+*
+
+# Git configuration & documentation
+!.gitignore
+!README.md
+
+# Training notebooks & pipeline scripts for the final models
+!aavesham_v2.ipynb
+!nlu_pipeline.ipynb
+!build_updated_best_notebook.py
+!evaluate_submission.py
+
+# Datasets & domain lexicons required for training and inference
+!train.csv
+!test.csv
+!data/
+!data/train.csv
+!data/test.csv
+!data/sample_submission.csv
+!data/test_ground_truth_benchmark.csv
+!data/verified_class_meanings.json
+!data/xlit_word_dict.json
+
+# Lightweight benchmark & final submission metrics read by demo_ui
+!benchmark_models_comparison.csv
+!submission.csv
+!submission_aavesham_pure.csv
+
+# Interactive Demo UI (excludes demo_ui/cache/ and __pycache__/)
+!demo_ui/
+!demo_ui/README.md
+!demo_ui/server.py
+!demo_ui/inference_engine.py
+!demo_ui/static/
+!demo_ui/static/**
+
+# Never track OS/Python artifacts even inside un-ignored folders
+.DS_Store
+**/.DS_Store
+**/__pycache__/
+*.pyc

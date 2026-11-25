@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AnveshanNLP — Aavesham v2 Intent Workbench</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="4" stroke="#09090b" stroke-width="1.75"/>
+        <path d="M7 15.5V8.5L11.5 15.5V8.5M14.5 15.5L17.5 8.5M15.4 13.5H18" stroke="#09090b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-title">AnveshanNLP</span>
+        <span class="brand-sep">/</span>
+        <span class="brand-sub">Aavesham v2 · 56-Class Intent Workbench</span>
+      </div>
+    </div>
+
+    <div class="header-telemetry">
+      <div class="tel-item" id="compliance-pill">
+        <span class="tel-label">Param Budget</span>
+        <span class="tel-val mono" id="compliance-pill-text">Loading...</span>
+      </div>
+      <div class="tel-divider"></div>
+      <div class="tel-item" id="device-pill">
+        <span class="tel-label">Device</span>
+        <span class="tel-val mono" id="device-pill-text">...</span>
+      </div>
+      <div class="tel-divider"></div>
+      <div class="tel-item">
+        <span class="tel-label">Benchmark F1</span>
+        <span class="tel-val mono" id="hdr-f1">0.8301</span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <div class="tabs-inner">
+      <button class="tab active" data-tab="live">Live Inference &amp; OOS</button>
+      <button class="tab" data-tab="multiscript">Multi-Script Robustness</button>
+      <button class="tab" data-tab="compliance">Latency &amp; &le;300M Audit</button>
+      <button class="tab" data-tab="taxonomy">56-Intent Taxonomy</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- TAB 1: LIVE INTENT & CLASS 55 OOS CONSOLE -->
+    <section id="tab-live" class="tab-panel active">
+      <div class="grid-main">
+        <!-- Left Column: Input & Controls -->
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Query Input</h2>
+              <p class="caption">Evaluate Hindi (Devanagari), Hinglish (Latin), code-switched Mixed, or out-of-scope utterances.</p>
+            </div>
+            <div class="segmented" role="group" aria-label="Model Mode">
+              <button class="mode-btn active" data-mode="ensemble">Geometric Ensemble</button>
+              <button class="mode-btn" data-mode="aavesham_v2_pure">aavesham_v2 Only</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-label-row">
+              <label for="query-input">Utterance</label>
+              <span class="shortcut-hint mono">⌘/Ctrl + Enter</span>
+            </div>
+            <div class="input-row">
+              <textarea id="query-input" rows="2" placeholder="Enter Hindi, Hinglish, Mixed, or OOS query...">kripaya rasoeeghar ki battiyaan band kar den</textarea>
+              <button id="predict-btn" class="btn-primary">Classify</button>
+            </div>
+          </div>
+
+          <div class="presets-row">
+            <span class="micro-label">Sample Utterances</span>
+            <div class="chip-list" id="preset-chips"></div>
+          </div>
+
+          <div class="rule"></div>
+
+          <!-- Class 55 OOS Fallback Controls -->
+          <div class="oos-head">
+            <div>
+              <h3>Class 55 (Out-of-Scope / Catch-All) Fallback</h3>
+              <p class="caption">
+                Class 55 is a 30.72%-purity catch-all (<code>play_podcasts</code>, <code>play_game</code>, <code>alarm_query</code> &amp; OOS). Tune rescue &amp; OOS guard thresholds live.
+              </p>
+            </div>
+            <label class="checkbox-row">
+              <input type="checkbox" id="tail-multipliers-toggle" checked />
+              <span>Tail multipliers <span class="mono">(55×1.30, 53×1.15, 12×1.15)</span></span>
+            </label>
+          </div>
+
+          <div class="sliders-grid">
+            <div class="slider-cell">
+              <div class="slider-top">
+                <label for="oos-conf-slider"><code>OOS_CONF</code> Rescue <span class="muted">(aavesham_v2)</span></label>
+                <span class="mono strong" id="oos-conf-val">0.50</span>
+              </div>
+              <input type="range" id="oos-conf-slider" min="0" max="0.95" step="0.05" value="0.50" />
+              <p class="micro-note">When argmax = 55 and confidence &lt; threshold, reassign to 2nd-best intent.</p>
+            </div>
+
+            <div class="slider-cell">
+              <div class="slider-top">
+                <label for="oos-guard-slider">Low-Confidence OOS Guard</label>
+                <span class="mono strong" id="oos-guard-val">0.22</span>
+              </div>
+              <input type="range" id="oos-guard-slider" min="0" max="0.60" step="0.02" value="0.22" />
+              <p class="micro-note">When top in-scope confidence &lt; threshold, route utterance to Class 55 fallback.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Result & Telemetry -->
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Output &amp; Latency</h2>
+            <span class="tag mono" id="script-badge">—</span>
+          </div>
+
+          <div class="verdict-box">
+            <div class="verdict-top">
+              <span class="micro-label">Predicted Intent</span>
+              <span class="mono verdict-conf" id="pred-conf">—</span>
+            </div>
+            <div class="verdict-intent mono" id="pred-intent">—</div>
+            <div class="verdict-kv">
+              <span id="pred-id">Target: —</span>
+              <span class="sep-dot">·</span>
+              <span id="pred-domain">Domain: —</span>
+            </div>
+            <div id="oos-status-banner" class="alert-bar hidden"></div>
+          </div>
+
+          <div class="trace-box">
+            <div class="trace-line">
+              <span class="trace-k">XLM-R Input</span>
+              <span class="trace-v mono" id="trace-xlm-text">—</span>
+            </div>
+            <div class="trace-line">
+              <span class="trace-k">LinearSVC Input</span>
+              <span class="trace-v mono" id="trace-svc-text">—</span>
+            </div>
+            <div class="trace-foot mono">
+              <span>Gate: <strong id="trace-gate">—</strong></span>
+              <span>Tokens: <strong id="trace-tokens">—</strong></span>
+              <span>Entropy: <strong id="trace-entropy">—</strong></span>
+            </div>
+          </div>
+
+          <div class="latency-box">
+            <div class="latency-top">
+              <span class="micro-label">Inference Latency</span>
+              <span class="mono"><strong id="lat-total">—</strong> ms · <span id="lat-qps">—</span> q/s</span>
+            </div>
+            <div class="latency-ruler" id="latency-bar">
+              <div class="seg seg-pre" id="bar-pre" style="width: 5%"></div>
+              <div class="seg seg-xlm" id="bar-xlm" style="width: 75%"></div>
+              <div class="seg seg-svc" id="bar-svc" style="width: 15%"></div>
+              <div class="seg seg-fus" id="bar-fus" style="width: 5%"></div>
+            </div>
+            <div class="latency-stats mono">
+              <span><i class="sw sw-pre"></i>Pre <b id="lat-pre">—</b>ms</span>
+              <span><i class="sw sw-xlm"></i>XLM-R <b id="lat-xlm">—</b>ms</span>
+              <span><i class="sw sw-svc"></i>SVC <b id="lat-svc">—</b>ms</span>
+              <span><i class="sw sw-fus"></i>Fusion <b id="lat-fus">—</b>ms</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Row: Top-5 Table & Class 55 Inspector -->
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Top-5 Probability Breakdown</h2>
+            <span class="caption">Ensemble score vs XLM-RoBERTa vs LinearSVC</span>
+          </div>
+          <div id="top5-container" class="top5-table-wrap"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Class 55 Fallback Trace</h2>
+            <span class="tag" id="oos-event-badge">In-Scope</span>
+          </div>
+
+          <div class="kv-grid">
+            <div class="kv-cell">
+              <span class="micro-label">Final P(55)</span>
+              <span class="kv-num mono" id="oos-prob-final">—</span>
+            </div>
+            <div class="kv-cell">
+              <span class="micro-label">XLM-R P(55)</span>
+              <span class="kv-num mono" id="oos-prob-xlm">—</span>
+            </div>
+            <div class="kv-cell">
+              <span class="micro-label">LinearSVC P(55)</span>
+              <span class="kv-num mono" id="oos-prob-svc">—</span>
+            </div>
+            <div class="kv-cell">
+              <span class="micro-label">Raw Argmax</span>
+              <span class="kv-num mono small-num" id="oos-raw-class">—</span>
+            </div>
+          </div>
+
+          <p class="rule-explain" id="oos-explanation">
+            Run a query to inspect Class 55 decision logic.
+          </p>
+
+          <div class="presets-row">
+            <span class="micro-label">OOS &amp; Edge Cases</span>
+            <div class="chip-list" id="oos-preset-chips"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: MULTI-SCRIPT ROBUSTNESS LAB -->
+    <section id="tab-multiscript" class="tab-panel">
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Multi-Script Equivalence Suite</h2>
+            <p class="caption">
+              Test cross-script consistency across Devanagari, Clean Hinglish, Noisy ASR Hinglish, and Code-Switched Mixed inputs.
+            </p>
+          </div>
+          <button id="run-multiscript-btn" class="btn-primary">Run 4-Way Check</button>
+        </div>
+
+        <div class="presets-row">
+          <span class="micro-label">Preset Suites</span>
+          <div class="chip-list" id="ms-suite-chips"></div>
+        </div>
+
+        <div class="ms-inputs-grid">
+          <div class="ms-field">
+            <label for="ms-dev">1 · Devanagari (Hindi)</label>
+            <input type="text" id="ms-dev" value="दिल्ली से देहरादून के लिए ट्रेन टिकट बुक करो" />
+          </div>
+          <div class="ms-field">
+            <label for="ms-hing">2 · Clean Hinglish (Latin)</label>
+            <input type="text" id="ms-hing" value="dilli se dehradun ke liye train ticket book karo" />
+          </div>
+          <div class="ms-field">
+            <label for="ms-noisy">3 · Phonetic / Noisy ASR Hinglish</label>
+            <input type="text" id="ms-noisy" value="dilli se dehraadun k lie tren tikat buk kr plz" />
+          </div>
+          <div class="ms-field">
+            <label for="ms-mixed">4 · Code-Switched Mixed</label>
+            <input type="text" id="ms-mixed" value="दिल्ली se dehradun के लिए train ticket book करो" />
+          </div>
+        </div>
+
+        <div id="ms-summary-banner" class="ms-summary hidden"></div>
+        <div id="ms-results-grid" class="ms-results-grid"></div>
+      </div>
+    </section>
+
+    <!-- TAB 3: LATENCY & <= 300M PARAMETER COMPLIANCE -->
+    <section id="tab-compliance" class="tab-panel">
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Parameter Budget Audit (&le; 300M)</h2>
+            <span class="tag tag-ok" id="audit-badge">COMPLIANT</span>
+          </div>
+          <div id="param-audit-content"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Session Latency Telemetry</h2>
+            <button id="reset-telemetry-btn" class="btn-ghost">Reset</button>
+          </div>
+          <div class="kv-grid kv-grid-4">
+            <div class="kv-cell">
+              <span class="micro-label">Queries</span>
+              <span class="kv-num mono" id="sess-count">0</span>
+            </div>
+            <div class="kv-cell">
+              <span class="micro-label">Mean</span>
+              <span class="kv-num mono" id="sess-mean">—</span>
+            </div>
+            <div class="kv-cell">
+              <span class="micro-label">P50</span>
+              <span class="kv-num mono" id="sess-p50">—</span>
+            </div>
+            <div class="kv-cell">
+              <span class="micro-label">P95</span>
+              <span class="kv-num mono" id="sess-p95">—</span>
+            </div>
+          </div>
+          <div id="latency-history-list" class="latency-history"></div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Script-Wise Macro-F1 Gain</h2>
+            <span class="caption">High-Confidence Benchmark (N = 3,253)</span>
+          </div>
+          <div id="script-benchmark-bars"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>5-Fold CV &amp; Benchmark Comparison</h2>
+            <span class="caption">Model family trade-offs</span>
+          </div>
+          <div id="baseline-table-wrap"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: 56-INTENT TAXONOMY -->
+    <section id="tab-taxonomy" class="tab-panel">
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>56-Class Intent Taxonomy</h2>
+            <p class="caption">Click any sample utterance to classify it in the Live Console.</p>
+          </div>
+          <input type="search" id="taxonomy-search" class="search-input" placeholder="Search ID, intent, domain, or phrase..." />
+        </div>
+        <div id="taxonomy-grid" class="taxonomy-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,786 @@
+[
+  {
+    "target": 0,
+    "domain": "datetime",
+    "intent_name": "datetime_query",
+    "train_samples": 497,
+    "exact_matches": 378,
+    "purity": 99.73544973544973,
+    "extra_note": "",
+    "samples": [
+      "इस वर्ष मार्च का चौथा सोमवार कौन सी तारीख है",
+      "नमस्ते अब क्या समय हो गया है",
+      "आज कौन सा महीना है"
+    ]
+  },
+  {
+    "target": 1,
+    "domain": "iot",
+    "intent_name": "iot_hue_lightchange",
+    "train_samples": 193,
+    "exact_matches": 129,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "prakash ka rang lal par set kare",
+      "घर की रोशनी नीली",
+      "लिविंग रूम की रोशनी को पीले रंग में बदलें"
+    ]
+  },
+  {
+    "target": 2,
+    "domain": "transport",
+    "intent_name": "transport_ticket",
+    "train_samples": 193,
+    "exact_matches": 88,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "दिल्ली से देहरादून के लिए एक चेयर कार ए. सी. ट्रेन टिकट बुक करो",
+      "chennai ke liye relgaari tikat buk karo",
+      "dilli se dehraadun ke lie ek cheyar kar e. see. tren tikat buk karo"
+    ]
+  },
+  {
+    "target": 3,
+    "domain": "takeaway",
+    "intent_name": "takeaway_query",
+    "train_samples": 183,
+    "exact_matches": 124,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "क्या डोमिनोज टेकअवे करता है",
+      "कृपया कलिका भोजना लय ववितरण का पपता लगाएं",
+      "मेरा खाने का ऑर्डर कब तक पहुँचने वाला है यहां"
+    ]
+  },
+  {
+    "target": 4,
+    "domain": "qa",
+    "intent_name": "qa_stock",
+    "train_samples": 220,
+    "exact_matches": 139,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "kya mukesh anbaani mere sucheebaddh sheyron mein nivesh kar rahaa hai",
+      "इस समय शीर्ष दस स्टॉक कैसे हैं",
+      "रिलायंस का वर्तमान स्टॉक मूल्य क्या है"
+    ]
+  },
+  {
+    "target": 5,
+    "domain": "general",
+    "intent_name": "general_greet",
+    "train_samples": 93,
+    "exact_matches": 30,
+    "purity": 70.0,
+    "extra_note": "Greetings & salutations",
+    "samples": [
+      "आज आप कैसे हैं",
+      "हाय क्या आप भी कभी थकते हैं",
+      "hay kia aap mujhe sun paa rahe hain"
+    ]
+  },
+  {
+    "target": 6,
+    "domain": "recommendation",
+    "intent_name": "recommendation_events",
+    "train_samples": 275,
+    "exact_matches": 183,
+    "purity": 99.4535519125683,
+    "extra_note": "",
+    "samples": [
+      "हमारे देश के लिए कोई विशेष अवकाश खोज रहे हैं",
+      "मैं आज रात शहर में क्या कर सकता हूँ",
+      "क्या आज हमारे यहाँ कोई कार्निवाल है"
+    ]
+  },
+  {
+    "target": 7,
+    "domain": "music",
+    "intent_name": "music_dislikeness",
+    "train_samples": 92,
+    "exact_matches": 15,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "मुझे इस गीत से नफरत है",
+      "यह गाना बहुत अच्छा नहीं है",
+      "vah baikagraaund gaanaa bahut hi bhayaanak h"
+    ]
+  },
+  {
+    "target": 8,
+    "domain": "iot",
+    "intent_name": "iot_wemo_off",
+    "train_samples": 98,
+    "exact_matches": 55,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "olly कृपया स्मार्ट सॉकेट बंद करें",
+      "sabhee paavar plag band kar do",
+      "wemo plug socket बंद करें"
+    ]
+  },
+  {
+    "target": 9,
+    "domain": "cooking",
+    "intent_name": "cooking_recipe",
+    "train_samples": 298,
+    "exact_matches": 214,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "मुझे तंदूरी चिकन की विधि दिखाओ",
+      "olly क्या सॉफ्ट चीज हार्ड चीज से अच्छा होता है",
+      "और टिप्पणियां नहीं"
+    ]
+  },
+  {
+    "target": 10,
+    "domain": "qa",
+    "intent_name": "qa_currency",
+    "train_samples": 239,
+    "exact_matches": 154,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "yooes dolar yooro vinimay dar kya hai",
+      "रुपये और डॉलर का एक्सचेंज रेट क्या है",
+      "mujhe yuro main das dolar ki vinimay dar bataao"
+    ]
+  },
+  {
+    "target": 11,
+    "domain": "transport",
+    "intent_name": "transport_traffic",
+    "train_samples": 162,
+    "exact_matches": 109,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "pachchis par yataayat kaisaa hai",
+      "क्या कोई यातायात है",
+      "सेंट्रल पार्क रोड के पास वर्तमान में यातायात कैसा है"
+    ]
+  },
+  {
+    "target": 12,
+    "domain": "general",
+    "intent_name": "general_quirky",
+    "train_samples": 902,
+    "exact_matches": 575,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "ढाई घंटे के बाद घर को ऑटो लॉक करें",
+      "ओली मैं कल छुट्टी ले रहा हूँ",
+      "tumhaara din kaisaa ja raha h"
+    ]
+  },
+  {
+    "target": 13,
+    "domain": "weather",
+    "intent_name": "weather_query",
+    "train_samples": 896,
+    "exact_matches": 613,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "शनिवार का पूर्वानुमान क्या है",
+      "क्या मैं आज शॉर्ट्स से दूर हो पाऊंगा",
+      "kya budhvaar ko tapmaan thand se oopar rahegaa"
+    ]
+  },
+  {
+    "target": 14,
+    "domain": "audio",
+    "intent_name": "audio_volume_up",
+    "train_samples": 128,
+    "exact_matches": 94,
+    "purity": 98.93617021276596,
+    "extra_note": "",
+    "samples": [
+      "आवाज़ बढ़ाओ",
+      "मीडिया वॉल्यूम बढ़ा दिया",
+      "जोर से बोलो"
+    ]
+  },
+  {
+    "target": 15,
+    "domain": "email",
+    "intent_name": "email_addcontact",
+    "train_samples": 90,
+    "exact_matches": 58,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "tataa ko imel ka pataa lagaaen or ise meri sanpark suchee main dal den",
+      "मेरे संपर्कों को स्टोर करें",
+      "कॉन्टेक्ट्स को एडिट करो"
+    ]
+  },
+  {
+    "target": 16,
+    "domain": "takeaway",
+    "intent_name": "takeaway_order",
+    "train_samples": 183,
+    "exact_matches": 114,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "मेरे लिए कुछ खाना लाओ",
+      "khurja hotal se khaane ka ordar",
+      "dominoj se do pijjaa khariden"
+    ]
+  },
+  {
+    "target": 17,
+    "domain": "email",
+    "intent_name": "email_querycontact",
+    "train_samples": 179,
+    "exact_matches": 113,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "mujhe hiphajurrahmaan ka mobail nanbar do",
+      "anupam ki sampark jaankaari kholen",
+      "अमित के बारे में मेरी जानकारी में आपके पास फ़ाइल में क्या जानकारी है"
+    ]
+  },
+  {
+    "target": 18,
+    "domain": "iot",
+    "intent_name": "iot_hue_lightup",
+    "train_samples": 130,
+    "exact_matches": 74,
+    "purity": 97.2972972972973,
+    "extra_note": "",
+    "samples": [
+      "यहाँ अंधेरा है लाइट की गहराई को बढ़ा दो",
+      "बत्तियों की रोशनी बढ़ाएं",
+      "batiyaan chaalu"
+    ]
+  },
+  {
+    "target": 19,
+    "domain": "recommendation",
+    "intent_name": "recommendation_locations",
+    "train_samples": 254,
+    "exact_matches": 162,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "jaitoon ke bageeche me do ke liye aarakshan karein",
+      "बीयर बेचने वाली दुकान ढूंढो",
+      "स्थानीय उत्पादों के साथ कोई भी कृषि बाजार"
+    ]
+  },
+  {
+    "target": 20,
+    "domain": "play",
+    "intent_name": "play_audiobook",
+    "train_samples": 238,
+    "exact_matches": 138,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "चाणक्य की चाणक्य नीति फिर से चालू करो",
+      "सफ़ल सोच का सफ़ल जादू को फिर से चालू करो",
+      "गाने का नाम ओपन करो"
+    ]
+  },
+  {
+    "target": 21,
+    "domain": "lists",
+    "intent_name": "lists_createoradd",
+    "train_samples": 260,
+    "exact_matches": 157,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "मेरी ख़रीददारी सूची में एक टैब ऐड करो",
+      "इसमें शामिल हों",
+      "mere nots kholo"
+    ]
+  },
+  {
+    "target": 22,
+    "domain": "news",
+    "intent_name": "news_query",
+    "train_samples": 743,
+    "exact_matches": 437,
+    "purity": 99.31350114416476,
+    "extra_note": "",
+    "samples": [
+      "ऑटो मोबाइल्स",
+      "अब मोदी ने क्या कर दिया",
+      "खबर खींचो"
+    ]
+  },
+  {
+    "target": 23,
+    "domain": "iot",
+    "intent_name": "iot_wemo_on",
+    "train_samples": 87,
+    "exact_matches": 43,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "कृपया स्मार्ट सॉकेट चालू करें",
+      "vemo chaalu karein",
+      "tee. vi. soket on kar denaa jab mai ghar pahunchu"
+    ]
+  },
+  {
+    "target": 24,
+    "domain": "general",
+    "intent_name": "general_joke",
+    "train_samples": 120,
+    "exact_matches": 77,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "एक चुटकुला सुनाओ",
+      "vyangyatmak chutkule",
+      "वेब पर चुटकुले खोजें"
+    ]
+  },
+  {
+    "target": 25,
+    "domain": "qa",
+    "intent_name": "qa_definition",
+    "train_samples": 410,
+    "exact_matches": 269,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "वस्तु को गूगल करें और देखें",
+      "हिचकिचाहट का क्या अर्थ है",
+      "santraa ki paribhasha kya hai"
+    ]
+  },
+  {
+    "target": 26,
+    "domain": "social",
+    "intent_name": "social_query",
+    "train_samples": 146,
+    "exact_matches": 101,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "क्या मेरे पास किसी सोशल मीडिया पर कोई निजी संदेश है",
+      "क्या फेसबुक पर मेरे दोस्त राम की कोई पोस्ट है",
+      "mujhe un sthanon ki soochi dikhaao jahaan mere rishtedar unkee tasveeron ke aadhar par rahe hai"
+    ]
+  },
+  {
+    "target": 27,
+    "domain": "music",
+    "intent_name": "music_settings",
+    "train_samples": 96,
+    "exact_matches": 47,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "सेटिंग्स सेव करें",
+      "दोहराएं यह संगीत",
+      "ek baar fir yahi gana chalao yaar"
+    ]
+  },
+  {
+    "target": 28,
+    "domain": "audio",
+    "intent_name": "audio_volume_other",
+    "train_samples": 85,
+    "exact_matches": 19,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "volyum star ko adhiktam mein badlen",
+      "डिफ़ॉल्ट ऑडियो सेटिंग सेट करें",
+      "change sound profile to outdoor mode"
+    ]
+  },
+  {
+    "target": 29,
+    "domain": "calendar",
+    "intent_name": "calendar_remove",
+    "train_samples": 456,
+    "exact_matches": 299,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "मैं चाहता हूं कि इस घटना को मेरे कैलेंडर से हटा दिया जाए",
+      "इस घटना को मेरे कैलेंडर अधिसूचना से हटा दें",
+      "आज के लिए सभी ईवेंट और कार्य हटाएं"
+    ]
+  },
+  {
+    "target": 30,
+    "domain": "iot",
+    "intent_name": "iot_hue_lightdim",
+    "train_samples": 121,
+    "exact_matches": 85,
+    "purity": 96.47058823529412,
+    "extra_note": "",
+    "samples": [
+      "ye roshnee bahut ujjval hain kripaya inhen kam kare",
+      "alexa कृपया घर में बत्तियाँ बंद कर दें",
+      "मुझे डिम कलर दिखाओ"
+    ]
+  },
+  {
+    "target": 31,
+    "domain": "calendar",
+    "intent_name": "calendar_query",
+    "train_samples": 861,
+    "exact_matches": 537,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "क्या मेरे पास अगले रविवार को कोई शेष है",
+      "मुझे कल और आज सुबह के बीच की वर्तमान घटनाओं के बारे में बताएं",
+      "शुक्रवार को शिखर बैठक कहाँ हो रही है"
+    ]
+  },
+  {
+    "target": 32,
+    "domain": "email",
+    "intent_name": "email_sendemail",
+    "train_samples": 579,
+    "exact_matches": 372,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "नए पते पर ईमेल भेजें",
+      "क्या आप अंजलि को ईमेल कर सकते हैं और उसे बता सकते हैं कि मैं रास्ते में हूँ",
+      "plz imel ka javab den"
+    ]
+  },
+  {
+    "target": 33,
+    "domain": "iot",
+    "intent_name": "iot_cleaning",
+    "train_samples": 137,
+    "exact_matches": 102,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "vaikyum on karo",
+      "रसोई साफ करने के लिए रूमबा ललें",
+      "vaikyoom klinar ko abhee shuru karo kanpnee a rahee h"
+    ]
+  },
+  {
+    "target": 34,
+    "domain": "audio",
+    "intent_name": "audio_volume_down",
+    "train_samples": 95,
+    "exact_matches": 46,
+    "purity": 97.82608695652173,
+    "extra_note": "",
+    "samples": [
+      "volyoom ko turant bis parsent par set karo",
+      "मीडिया वॉल्यूम कम करें",
+      "avaz ko kam karo"
+    ]
+  },
+  {
+    "target": 35,
+    "domain": "play",
+    "intent_name": "play_radio",
+    "train_samples": 412,
+    "exact_matches": 287,
+    "purity": 99.65156794425087,
+    "extra_note": "",
+    "samples": [
+      "आकाशवाणी चालू करो",
+      "is kaaryakram ka upyog kare",
+      "रेडियो चला दो"
+    ]
+  },
+  {
+    "target": 36,
+    "domain": "cooking",
+    "intent_name": "cooking_query",
+    "train_samples": 84,
+    "exact_matches": 3,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "bina tel ke svadisht snaiks kaise pakaaen",
+      "palak paneer me bright green color kaise maintain karein",
+      "momos red chutney recipe street style"
+    ]
+  },
+  {
+    "target": 37,
+    "domain": "datetime",
+    "intent_name": "datetime_convert",
+    "train_samples": 92,
+    "exact_matches": 63,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "इस समय को ist में बदलें",
+      "यहाँ से नई दिल्ली में समय का अंतर क्या है",
+      "जब यहाँ रात के दस बज रहे हैं तो मुंबई में क्या समय है"
+    ]
+  },
+  {
+    "target": 38,
+    "domain": "qa",
+    "intent_name": "qa_maths",
+    "train_samples": 131,
+    "exact_matches": 72,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "बारह क्या चार से विभाजित है",
+      "teees guna bavan ky hai",
+      "ek hazaar ko gunaa karo barah se"
+    ]
+  },
+  {
+    "target": 39,
+    "domain": "iot",
+    "intent_name": "iot_hue_lightoff",
+    "train_samples": 209,
+    "exact_matches": 154,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "kripaya rasoeeghar ki battiyaan band kar den",
+      "ऑली शुभ रात्रि बत्तियां बंद",
+      "कृपया लाइट बंद करना"
+    ]
+  },
+  {
+    "target": 40,
+    "domain": "iot",
+    "intent_name": "iot_hue_lighton",
+    "train_samples": 85,
+    "exact_matches": 21,
+    "purity": 95.23809523809523,
+    "extra_note": "",
+    "samples": [
+      "मास्टर बेडरूम के दोनों लैंप ऑन कर दो",
+      "garage light chalu karo gadi park karni hai",
+      "घर की सभी लाइटें एक साथ चालू करें"
+    ]
+  },
+  {
+    "target": 41,
+    "domain": "transport",
+    "intent_name": "transport_query",
+    "train_samples": 333,
+    "exact_matches": 169,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "रेलगाड़ी टिकट के लिए कितना",
+      "ट्रेन टाइम बताओ",
+      "वहाँ जाने के लिए रेलगाड़ी का समय कितना है"
+    ]
+  },
+  {
+    "target": 42,
+    "domain": "music",
+    "intent_name": "music_likeness",
+    "train_samples": 158,
+    "exact_matches": 106,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "राय सुरक्षित करो",
+      "kripaya git ke sheershak main achchhee dhun ka not lagaaen",
+      "यह अब तक का सबसे अच्छा बैंड है"
+    ]
+  },
+  {
+    "target": 43,
+    "domain": "email",
+    "intent_name": "email_query",
+    "train_samples": 668,
+    "exact_matches": 427,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "पिछले सप्ताह में मुझे सभी ईमेल के विषयों और प्रेषकों की सूची बनाएं",
+      "नमस्ते क्या मेरा इनबॉक्स बढ़ गया है",
+      "kripaya mere nae mel parhen"
+    ]
+  },
+  {
+    "target": 44,
+    "domain": "play",
+    "intent_name": "play_music",
+    "train_samples": 1009,
+    "exact_matches": 658,
+    "purity": 99.24012158054711,
+    "extra_note": "",
+    "samples": [
+      "कृपया अरिजित सिंह के द्वारा तुम ही हो चालू करो",
+      "sangit bajae",
+      "शास्त्रीय कक्ष संगीत प्लेलिस्ट चलाएं"
+    ]
+  },
+  {
+    "target": 45,
+    "domain": "audio",
+    "intent_name": "audio_volume_mute",
+    "train_samples": 162,
+    "exact_matches": 115,
+    "purity": 96.52173913043478,
+    "extra_note": "",
+    "samples": [
+      "आधा करने के लिए कम मात्रा",
+      "baat na karo",
+      "aaj mat bolo"
+    ]
+  },
+  {
+    "target": 46,
+    "domain": "social",
+    "intent_name": "social_post",
+    "train_samples": 419,
+    "exact_matches": 282,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "इसे मेरे फेसबुक पर पोस्ट करें एल ओ एल",
+      "इस बारे में sony टी.वी को शिकायत भेजें जिसने काम करना छोड़ दिया",
+      "phesbuk laen or desh amereeka ko janmadin ki shubhakaamnaen den"
+    ]
+  },
+  {
+    "target": 47,
+    "domain": "qa",
+    "intent_name": "qa_factoid",
+    "train_samples": 805,
+    "exact_matches": 536,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "भारत की राजधानी क्या है",
+      "सबसे अधिक जनसंख्या वाला देश कौन सा है",
+      "जिराफ कितना लंबा है"
+    ]
+  },
+  {
+    "target": 48,
+    "domain": "calendar",
+    "intent_name": "calendar_set",
+    "train_samples": 1224,
+    "exact_matches": 777,
+    "purity": 99.87129987129987,
+    "extra_note": "",
+    "samples": [
+      "कल ग्यारह ऐ. एम. पर मुझे अपनी तीन पी. एम. की बैठक याद दिलाना",
+      "मुझे कल सात बजे कार्यालय की बैठक के बारे में याद दिलाना",
+      "mjhe shukravaar ko ephaesyu mein mere jeev vijnyan pareekshan ke bare mein yaad dilaen"
+    ]
+  },
+  {
+    "target": 49,
+    "domain": "alarm",
+    "intent_name": "alarm_remove",
+    "train_samples": 118,
+    "exact_matches": 76,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "set kie gae sabhee alaarm ko anset karein",
+      "कृपया इस अलार्म को हटा दें",
+      "मेरा काम अलार्म हटाओ"
+    ]
+  },
+  {
+    "target": 50,
+    "domain": "lists",
+    "intent_name": "lists_remove",
+    "train_samples": 247,
+    "exact_matches": 174,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "mai pichhle mahine ki shoping list dilit karna chaahtaa hoon",
+      "आइटम नंबर तीन को हटा दो",
+      "मैं पिछले महीने की शॉपिंग लिस्ट डिलीट करना चाहता हूँ"
+    ]
+  },
+  {
+    "target": 51,
+    "domain": "transport",
+    "intent_name": "transport_taxi",
+    "train_samples": 151,
+    "exact_matches": 95,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "मुझे अभी लेने के लिए taxi बुलाओ",
+      "olly सबसे नजदीकी ऊबर खोजो",
+      "स्थानीय cab बूक करो"
+    ]
+  },
+  {
+    "target": 52,
+    "domain": "recommendation",
+    "intent_name": "recommendation_movies",
+    "train_samples": 105,
+    "exact_matches": 69,
+    "purity": 100.0,
+    "extra_note": "",
+    "samples": [
+      "is saptah kaun see philmen chal rahi hai",
+      "प्रशिक्षण दिवस",
+      "अच्छी समीक्षा वाली फिल्में"
+    ]
+  },
+  {
+    "target": 53,
+    "domain": "music",
+    "intent_name": "music_query",
+    "train_samples": 221,
+    "exact_matches": 153,
+    "purity": 97.38562091503267,
+    "extra_note": "",
+    "samples": [
+      "yah geet vartaman mein kis shailee mein chal raha hai",
+      "abhee rediyo par kya chal raha h",
+      "jubin nautiyal"
+    ]
+  },
+  {
+    "target": 54,
+    "domain": "lists",
+    "intent_name": "lists_query",
+    "train_samples": 315,
+    "exact_matches": 205,
+    "purity": 99.51219512195122,
+    "extra_note": "",
+    "samples": [
+      "ओली आज की मेरी आज के काम की सूची में क्या है",
+      "mere dvara banaai antim paanch soochiyaan kia hai",
+      "क्या आज मेरी सूची में कुछ है"
+    ]
+  },
+  {
+    "target": 55,
+    "domain": "play",
+    "intent_name": "play_podcasts",
+    "train_samples": 249,
+    "exact_matches": 166,
+    "purity": 30.72289156626506,
+    "extra_note": "Composite catch-all class for: play_podcasts (51 matches), play_game (33 matches), alarm_query (33 matches)",
+    "samples": [
+      "कृपया अगले शनिवार सुबह आठ बजे जागो अलार्म बजाएं",
+      "ओली मुझे अभी थोड़ी कॉफी चाहिए",
+      "मेरा सबसे ज्यादा खेला जाने वाला पॉडकास्ट कौन सा है"
+    ]
+  }
+]
